@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   # get 'payments/show'
   resources :payments, only: %i[index show]
 
+  # get 'line_items/index'
+  resources :line_items, only: :index
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'products#index'
 end
