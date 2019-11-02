@@ -1,2 +1,7 @@
 <h1>Customers#index</h1>
 <p>Find me in app/views/customers/index.html.erb</p>
+<p>
+  <% @customers.each do |customer| %>
+    <%= link_to customer.firstName, customer, class: 'button is-link' %>
+  <% end %>
+</p>
