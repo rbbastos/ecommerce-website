@@ -1,30 +1,25 @@
 <div class="column is-one-third">
-  <% if product.image.present? %>
+  <div class="card">
     <div class="card-image">
-      <figure class="image is-4by3">
-        <%= image_tag(product.image, size: "16x10") %>
+      <figure class="image is-square">
+        <%= image_tag(product.image) %>
       </figure>
     </div>
-  <% end %>
-  <div class="card horse">
     <div class="card-content">
-    <p class="title is-4">
-
-
-        <%= product.name %>
-
-    </p>
-    <ul>
-      <li>
-        <strong>Manufacturer:</strong> <%= product.manufacturer %>
-      </li>
-      <li>
-        <strong>Description:</strong> <%= product.description%>
-      </li>
-      <li>
-        <strong>Price:</strong> <%= product.sellPrice %>
-      </li>
-    </ul>
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4">
+            <%= product.name%>
+          </p>
+          <p><strong>Manufacturer: </strong><%= product.manufacturer %></p>
+          <p><strong>Description: </strong><%= product.description %></p>
+        </div>
+      </div>
+      <div class="content">
+        <p><strong>Price: </strong><%= product.sellPrice %></p>
+        <br>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </div>
     </div>
   </div>
 </div>
