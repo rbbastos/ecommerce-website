@@ -1,7 +1,7 @@
 <h1>Products#index</h1>
 <p>Find me in app/views/products/index.html.erb</p>
-<p>
-  <% @products.each do |product| %>
-    <%= link_to product.name, product, class: 'button is-link' %>
-  <% end %>
-</p>
+<div class="columns is-multiline">
+  <%= render partial: 'product',
+             collection: @products,
+             locals: { name_is_link: true } %>
+</div>
