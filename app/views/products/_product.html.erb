@@ -9,7 +9,11 @@
       <div class="media">
         <div class="media-content">
           <p class="title is-4">
-            <%= product.name%>
+            <% if name_is_link %>
+              <%= link_to product.name, product%>
+            <% else %>
+              <%= product.name %>
+            <% end %>
           </p>
           <p><strong>Manufacturer: </strong><%= product.manufacturer %></p>
           <p><strong>Description: </strong><%= product.description %></p>
