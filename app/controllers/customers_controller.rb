@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CustomersController < ApplicationController
   def index
-    @customers = Customer.order(:name)
+    @pagy, @customers = pagy(Customer.order(:name))
   end
 
   def show

@@ -2,7 +2,7 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = Product.order(:name)
+    @pagy, @products = pagy(Product.order(:name), items: 10)
   end
 
   def show

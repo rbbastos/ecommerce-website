@@ -2,7 +2,7 @@
 
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.order(:name)
+    @pagy, @categories = pagy(Category.order(:name))
   end
 
   def show
