@@ -9,5 +9,28 @@
 <h2>postalCode: <%= @customer.postalCode %></h2>
 <h2>phone: <%= @customer.phone %></h2>
 <h2>stripeId: <%= @customer.stripeId %></h2>
+<br>
+<p>Orders</p>
+<% if @customer.orders.empty? %>
+<p>There are no orders for this customer.</p>
+<% else %>
 
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Order Status</th>
+      <th>Pst Time of Purchase</th>
+      <th>Pst Time of Purchase</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    <%= render partial: 'orders/order',
+             collection: @customer.orders,
+             locals: { name_is_link: true } %>
+  </tbody>
+</table>
+<% end %>
 
