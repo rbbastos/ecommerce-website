@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   # get 'products/index'
   # get 'products/show'
-  resources :products, only: %i[index show]
+  resources :products, only: %i[index show] do
+    collection do
+      get 'search_results'
+    end
+  end
 
   # get 'provinces/index'
   resources :provinces, only: :index
