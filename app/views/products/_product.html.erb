@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="content">
-        <p><strong>Price: </strong><%= product.sellPrice %></p>
+        <p><strong>Price: </strong><%= number_to_currency(product.sellPrice, unit: 'CDN$ ') %></p>
         <br>
         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
