@@ -14,7 +14,13 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item">
-        Home
+        <%= link_to "Home", root_path, class: "navbar-item" %>
+      </a>
+      <a class="navbar-item">
+        <%= link_to "About Us", permalink_path(permalink: 'about_us'), class: "navbar-item" %>
+      </a>
+       <a class="navbar-item">
+        <%= link_to "Contact Us", permalink_path(permalink: 'contact_us'), class: "navbar-item" %>
       </a>
 
       <a class="navbar-item">
