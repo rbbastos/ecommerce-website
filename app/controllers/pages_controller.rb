@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class PagesController < InheritedResources::Base
-  http_basic_authenticate_with name: 'rbbastos', password: '1234'
+  http_basic_authenticate_with(
+    name: 'rbbastos',
+    password: '1234',
+    except: :permalink
+  )
 
   def page_params
     params.require(:page).permit(:title, :content, :permalink)

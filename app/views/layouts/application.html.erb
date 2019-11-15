@@ -13,10 +13,11 @@
 
   <body>
     <section class="section">
-
       <%= render 'layouts/navigation'%>
     </section>
+
     <section class="section">
+    <%= yield :sidebar%>
     <%= yield %>
     </section>
 
