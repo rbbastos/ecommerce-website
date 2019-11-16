@@ -1,16 +1,21 @@
 <aside class="menu">
   <p class="menu-label">
-    General
+    Categories
   </p>
   <ul class="menu-list">
-    <li><a>Dashboard</a></li>
-    <li><a>Customers</a></li>
+    <li><a><%= link_to "Computers & Tablets", category_path(203) %></a></li>
+    <li><a><%= link_to "Musical Instruments", category_path(202) %></a></li>
+    <li><a><%= link_to "Smart Home & Car Electronics", category_path(204) %></a></li>
+    <li><a><%= link_to "TV & Home Theatre", category_path(201) %></a></li>
+    <li><a><%= link_to "Video Games & Movies", category_path(205) %></a></li>
   </ul>
   <p class="menu-label">
-    Administration
+    Current Offers
   </p>
   <ul class="menu-list">
-    <li><a>Team Settings</a></li>
+    <li><a>On Sale</a></li>
+    <li><a>New</a></li>
+    <li><a>Recently Updated</a></li>
     <li>
       <a class="is-active">Manage Your Team</a>
       <ul>

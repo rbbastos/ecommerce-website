@@ -2,7 +2,8 @@
   <%= @category.name %>
 </div>
 <h4>Product of this category</h4>
-
+<div class="columns is-multiline">
   <%= render partial: 'products/product',
              collection: @category.products,
              locals: { name_is_link: true } %>
+</div>
