@@ -24,7 +24,7 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
 
 product = Product.new
 customer = Customer.new
-json = ActiveSupport::JSON.decode(File.read('db/bestbuy.json'))
+json = ActiveSupport::JSON.decode(File.read('db/bestbuy4.json'))
 # puts json
 
 json.each do |name|
@@ -55,7 +55,7 @@ rand(50..100).times do
   end
 end
 
-rand(1..3).times do
+rand(30..50).times do
   o = Order.order('random()').first.id
   p = Product.order('random()').first
   LineItem.create(quantity: rand(1..10),
