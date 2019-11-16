@@ -6,4 +6,5 @@ class Product < ApplicationRecord
   has_many :orders, through: :lineItems, source: :order
   validates :name, :manufacturer, :sellPrice, presence: true
   validates :sellPrice, numericality: { only_decimal: true }
+  paginates_per 15
 end
