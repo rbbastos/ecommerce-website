@@ -12,7 +12,14 @@ class ProductsController < ApplicationController
   # GET /products/search_results
   # convention that search result should be shareable like a link. IF you submit with a POST you cant bookmark that, IF you submit GET you can bookmark that
   def search_results
-    @query = params[:query]
-    @products = Product.where('name LIKE ?', "%#{@query}%")
+    @query = params[:query].to_s
+    puts @query
+    @id = params[:category].to_s
+    if params[:category].to_s == ''
+      @products = Product.where('name LIKE ?', "%#{@query}%")
+    else
+      @products = Product.where('products.name LIKE ?', "%#{@query}%").joins(:category).where('categories.id == ?', @id.to_s)
+    end
+    # <%= select_tag :category, options_for_select(['All', 'Computers & Tablets', 'Musical Instruments', 'Smart Home & Car Electronics', 'TV & Home Theatre', 'Video Games & Movies']) %>
   end
 end

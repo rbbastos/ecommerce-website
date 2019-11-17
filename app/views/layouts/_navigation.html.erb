@@ -48,8 +48,17 @@
           </a>
         </div>
       </div>
+
     </div>
     <div class="navbar-end">
+    <div >
+      <%= form_with(url: search_results_products_path, method: "get", local: true) do %>
+        <%= label_tag(:query, "Search for:") %>
+        <%= text_field_tag(:query) %>
+        <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name'), include_blank: "Select Category" %>
+        <%= submit_tag("Search") %>
+      <% end %>
+    </div>
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-primary">
@@ -63,10 +72,4 @@
     </div>
   </div>
 </nav>
-<div >
-  <%= form_with(url: search_results_products_path, method: "get", local: true) do %>
-    <%= label_tag(:query, "Search for:") %>
-    <%= text_field_tag(:query) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</div>
+
