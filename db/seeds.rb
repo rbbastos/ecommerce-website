@@ -24,6 +24,8 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
 
 product = Product.new
 customer = Customer.new
+order = Order.new
+# lineItems = LineItem.new
 json = ActiveSupport::JSON.decode(File.read('db/bestbuy4.json'))
 # puts json
 
@@ -31,7 +33,7 @@ json.each do |name|
   # puts name.values[1][1..-1].to_f
   product = Product.create!(name: name.values[0],
                             category_id: name.values[3].to_i,
-                            manufacturer: 'Test',
+                            manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
                             image: name.values[2])
 end
@@ -46,23 +48,32 @@ rand(50..100).times do
                              postalCode: Faker::Address.postcode,
                              phone: Faker::PhoneNumber.phone_number,
                              province_id: rand(1..13).to_i)
-  rand(1..3).times do
-    customer.orders
-            .build(pstTimeOfPurchase: customer.province.gstTax,
-                   gstTimeOfPurchase: customer.province.pstTax,
-                   customer_id: customer.id.to_i)
-            .save
+  rand(0..3).times do
+    order = Order.create(pstTimeOfPurchase: customer.province.gstTax,
+                         gstTimeOfPurchase: customer.province.pstTax,
+                         customer_id: customer.id.to_i)
+    # order = customer.orders
+    #                 .build(pstTimeOfPurchase: customer.province.gstTax,
+    #                        gstTimeOfPurchase: customer.province.pstTax,
+    #                        customer_id: customer.id.to_i)
+    #                 .save
+    # puts order.id
+    p = Product.order('random()').first
+    LineItem.create(quantity: rand(1..10),
+                    priceTimeOfPurchase: p.sellPrice.to_d,
+                    product_id: p.id.to_i,
+                    order_id: order.id)
   end
 end
 
-rand(30..50).times do
-  o = Order.order('random()').first.id
-  p = Product.order('random()').first
-  LineItem.create(quantity: rand(1..10),
-                  priceTimeOfPurchase: p.sellPrice.to_d,
-                  product_id: p.id.to_i,
-                  order_id: o.to_i)
-end
+# rand(30..50).times do
+#   o = Order.order('random()').first.id
+#   p = Product.order('random()').first
+#   LineItem.create(quantity: rand(1..10),
+#                   priceTimeOfPurchase: p.sellPrice.to_d,
+#                   product_id: p.id.to_i,
+#                   order_id: o.to_i)
+# end
 
 puts "Generated #{Product.count} product."
 puts "Generated #{Category.count} categories."
