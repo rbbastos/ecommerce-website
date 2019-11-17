@@ -13,9 +13,9 @@
     Current Offers
   </p>
   <ul class="menu-list">
-    <li><a>On Sale</a></li>
-    <li><a>New</a></li>
-    <li><a>Recently Updated</a></li>
+    <li><a><%= link_to "On Sale", deal_path(2) %></a></li>
+    <li><a><%= link_to "New Release", deal_path(1) %></a></li>
+    <li><a><%= link_to "Regular Price", deal_path(3) %></a></li>
     <li>
       <a class="is-active">Manage Your Team</a>
       <ul>

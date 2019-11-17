@@ -35,7 +35,8 @@ json.each do |name|
                             category_id: name.values[3].to_i,
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
-                            image: name.values[2])
+                            image: name.values[2],
+                            deal_id: rand(1..3).to_i)
 end
 
 Faker::Config.locale = 'en-CA'

@@ -2,6 +2,7 @@
 
 class Product < ApplicationRecord
   belongs_to :category
+  belongs_to :deal
   has_many :lineItems
   has_many :orders, through: :lineItems, source: :order
   validates :name, :manufacturer, :sellPrice, presence: true

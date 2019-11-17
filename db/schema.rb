@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_200227) do
+ActiveRecord::Schema.define(version: 2019_11_17_014807) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,6 +57,12 @@ ActiveRecord::Schema.define(version: 2019_11_15_200227) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_customers_on_province_id"
+  end
+
+  create_table "deals", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -107,7 +113,9 @@ ActiveRecord::Schema.define(version: 2019_11_15_200227) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.string "deal_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["deal_id"], name: "index_products_on_deal_id"
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -124,4 +132,5 @@ ActiveRecord::Schema.define(version: 2019_11_15_200227) do
   add_foreign_key "orders", "customers"
   add_foreign_key "payments", "orders"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "deals"
 end
