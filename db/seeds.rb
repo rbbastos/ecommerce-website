@@ -31,11 +31,16 @@ json = ActiveSupport::JSON.decode(File.read('db/bestbuy4.json'))
 
 json.each do |name|
   # puts name.values[1][1..-1].to_f
+  # product = Product.create!(name: name.values[0],
+  #                           category_id: name.values[3].to_i,
+  #                           manufacturer: name.values[0].split(' ').first,
+  #                           sellPrice: name.values[1][1..-1].to_d,
+  #                           image: name.values[2],
+  #                           deal_id: rand(1..3).to_i)
   product = Product.create!(name: name.values[0],
                             category_id: name.values[3].to_i,
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
-                            image: name.values[2],
                             deal_id: rand(1..3).to_i)
 end
 

@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   belongs_to :deal
   has_many :lineItems
   has_many :orders, through: :lineItems, source: :order
+  has_one_attached :image
   validates :name, :manufacturer, :sellPrice, presence: true
   validates :sellPrice, numericality: { only_decimal: true }
   paginates_per 15

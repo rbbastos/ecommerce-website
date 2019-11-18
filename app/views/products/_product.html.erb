@@ -1,10 +1,12 @@
 <div class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-fifth-fullhd">
   <div class="card" style="height: 100%";>
-    <div class="card-image">
-      <figure class="image is-square">
-        <%= image_tag product.image %>
-      </figure>
-    </div>
+    <% if product.image.present? %>
+      <div class="card-image">
+        <figure class="image is-square">
+          <%= image_tag product.image %>
+        </figure>
+      </div>
+    <% end %>
     <div class="card-content">
       <div class="media">
         <div class="media-content">
