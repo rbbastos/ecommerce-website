@@ -42,6 +42,11 @@ json.each do |name|
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
                             deal_id: rand(1..3).to_i)
+  downloaded_image = open(name.values[2])
+  product.image.attach(io: downloaded_image,
+                       filename: name.values[2].split('/').last)
+
+  # p.images.attach(io: downloaded_image, filename: filename_to_use_locally)
 end
 
 Faker::Config.locale = 'en-CA'

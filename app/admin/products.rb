@@ -6,7 +6,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :manufacturer, :description, :sellPrice, :image, :category_id, :deal_id
+  permit_params :name, :manufacturer, :description, :sellPrice, :category_id, :deal_id, :image
 
   form do |f|
     f.semantic_errors # shows errors on :base
@@ -14,7 +14,7 @@ ActiveAdmin.register Product do
     f.inputs do
       f.input :image, as: :file
     end
-    f.actions         # adds the 'Submit' and 'Cancel' buttons
+    f.actions # adds the 'Submit' and 'Cancel' buttons
   end
 
   #
