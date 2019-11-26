@@ -57,8 +57,10 @@ class LineItemsController < ApplicationController
   def assign_atr(order)
     c = Customer.order('random()').first
     order.assign_attributes(
-      customer_id: c.id
+      customer_id: c.id,
       # price: Book.find(book_params[:book_id]).price
+      pstTimeOfPurchase: c.province.pstTax,
+      gstTimeOfPurchase: c.province.gstTax
     )
     order
   end
