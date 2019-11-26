@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def products_in_cart_count
     if Order.where(id: session[:order_id]).count.positive?
-      Order.where(id: session[:order_id]).first.order_books.sum(:quantity)
+      Order.where(id: session[:order_id]).first.line_items.sum(:quantity)
     else
       0
     end
