@@ -71,7 +71,7 @@ rand(50..100).times do
     # puts order.id
     p = Product.order('random()').first
     LineItem.create(quantity: rand(1..10),
-                    priceTimeOfPurchase: p.sellPrice.to_d,
+                    unit_price: p.sellPrice.to_d,
                     product_id: p.id.to_i,
                     order_id: order.id)
   end
@@ -81,7 +81,7 @@ end
 #   o = Order.order('random()').first.id
 #   p = Product.order('random()').first
 #   LineItem.create(quantity: rand(1..10),
-#                   priceTimeOfPurchase: p.sellPrice.to_d,
+#                   unit_price: p.sellPrice.to_d,
 #                   product_id: p.id.to_i,
 #                   order_id: o.to_i)
 # end

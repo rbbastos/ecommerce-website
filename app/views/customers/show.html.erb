@@ -50,7 +50,7 @@
         <% order.line_items.each do |li| %>
           <td><%= li.product.name %></td>
           <td><%= li.quantity %></td>
-          <td><%= number_to_currency(li.quantity * li.priceTimeOfPurchase + li.priceTimeOfPurchase.to_f * (order.pstTimeOfPurchase/100) + li.priceTimeOfPurchase.to_f * (order.gstTimeOfPurchase/100), :unit => "CAD$ ") %></td>
+          <td><%= number_to_currency(li.quantity * li.unit_price + li.unit_price.to_f * (order.pstTimeOfPurchase/100) + li.unit_price.to_f * (order.gstTimeOfPurchase/100), :unit => "CAD$ ") %></td>
       </tr>
       <% end %>
     <% end %>

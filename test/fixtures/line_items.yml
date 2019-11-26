@@ -2,12 +2,12 @@
 
 one:
   quantity: 1
-  priceTimeOfPurchase: 9.99
+  unit_price: 9.99
   product: one
   order: one
 
 two:
   quantity: 1
-  priceTimeOfPurchase: 9.99
+  unit_price: 9.99
   product: two
   order: two

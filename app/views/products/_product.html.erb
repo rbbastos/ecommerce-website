@@ -1,3 +1,4 @@
+
 <div class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-fifth-fullhd">
   <div class="card" style="height: 100%";>
     <% if product.image.present? %>
@@ -23,9 +24,15 @@
       </div>
       <div class="content">
         <p><strong>Price: </strong><%= number_to_currency(product.sellPrice, unit: 'CDN$ ') %></p>
-        <br>
+
+        <%= form_with model: @line_item do |f| %>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+          <%= f.submit "Add to cart" %>
+        <% end %>
         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
     </div>
   </div>
 </div>
+
