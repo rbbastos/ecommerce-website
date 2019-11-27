@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class LineItemsController < ApplicationController
+  # before_action :initialize_session
+  after_action :update_session, only: [:create]
+
   def index
     @line_items = LineItem.order(:name)
   end
@@ -55,12 +58,12 @@ class LineItemsController < ApplicationController
   end
 
   def assign_atr(order)
-    c = Customer.order('random()').first
+    @cust_id = session[:cust_id]
+    @cust = Customer.find(@cust_id)
     order.assign_attributes(
-      customer_id: c.id,
-      # price: Book.find(book_params[:book_id]).price
-      pstTimeOfPurchase: c.province.pstTax,
-      gstTimeOfPurchase: c.province.gstTax
+      customer_id: @cust_id,
+      pstTimeOfPurchase: @cust.province.pstTax,
+      gstTimeOfPurchase: @cust.province.gstTax
     )
     order
   end
@@ -72,6 +75,7 @@ class LineItemsController < ApplicationController
   def add_product_to_order(order)
     order.line_items.new(item_params)
     assign_atr(order).save
+    flash[:success] = 'Product added in the shopping cart.'
     redirect_to products_path item_params[:product_id]
   end
 
@@ -84,6 +88,7 @@ class LineItemsController < ApplicationController
     end
     @product.save
     @order.save
+    flash[:success] = 'Cart updated successfuly!'
     redirect_to cart_path
   end
 
@@ -99,5 +104,9 @@ class LineItemsController < ApplicationController
       flash[:success] = 'Product added in the shopping cart.'
       redirect_to products_path item_params[:product_id]
     end
+  end
+
+  def update_session
+    session[:order_id] = @order.id
   end
 end

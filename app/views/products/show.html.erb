@@ -3,6 +3,11 @@
 </div>
 <br>
 <br>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 <%= render partial: 'product',
            object: @product,
            locals: { name_is_link: false } %>

@@ -4,6 +4,7 @@
   </div>
 <% end %>
 <%=  debug session[:order_id] %>
+<%=  debug session[:cust] %>
 
 <% if !@order_item.nil? && @order_item.errors.any? %>
 	<ul>
@@ -43,9 +44,34 @@
 			</div>
 		</div>
 	<% end %>
+	<%= link_to "Review Order", review_order_path, class:"button is-success" %>
 <% else %>
 	<p>No items in this cart.</p>
 <% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

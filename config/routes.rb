@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   # get 'orders/index'
   # get 'orders/show'
   resources :orders, only: %i[index show]
+  get '/review_order', to: 'orders#review_order', as: 'review_order'
+  get '/order_final', to: 'orders#order_final', as: 'order_final'
 
   # get 'payments/index'
   # get 'payments/show'
