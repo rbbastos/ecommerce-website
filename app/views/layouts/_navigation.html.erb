@@ -23,28 +23,42 @@
         <%= link_to "Contact Us", permalink_path(permalink: 'contact_us'), class: "navbar-item" %>
       </a>
 
-      <a class="navbar-item">
-        Documentation
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Offers
       </a>
-
+        <div class="navbar-dropdown">
+            <a class="navbar-item">
+              <%= link_to "On Sale", deal_path(2), class: "navbar-item" %>
+            </a>
+            <a class="navbar-item">
+              <%= link_to "New Release", deal_path(1), class: "navbar-item" %>
+            </a>
+            <a class="navbar-item">
+              <%= link_to "Regular Price", deal_path(3), class: "navbar-item" %>
+            </a>
+          </div>
+    </div>
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          More
+          Categories
         </a>
 
         <div class="navbar-dropdown">
           <a class="navbar-item">
-            About
+            <%= link_to "Computers & Tablets", category_path(203), class:"navbar-item" %>
           </a>
           <a class="navbar-item">
-            Jobs
+            <%= link_to "Musical Instruments", category_path(202), class:"navbar-item" %>
           </a>
           <a class="navbar-item">
-            Contact
+            <%= link_to "Smart Home & Car Electronics", category_path(204), class:"navbar-item" %>
           </a>
-          <hr class="navbar-divider">
           <a class="navbar-item">
-            Report an issue
+            <%= link_to "TV & Home Theatre", category_path(201), class:"navbar-item" %>
+          </a>
+          <a class="navbar-item">
+            <%= link_to "Video Games & Movies", category_path(205), class:"navbar-item" %>
           </a>
         </div>
       </div>
