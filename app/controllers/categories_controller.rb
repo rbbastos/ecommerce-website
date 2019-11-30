@@ -3,6 +3,7 @@
 class CategoriesController < ApplicationController
   def index
     @categories = Category.order(:name)
+    # @line_item = current_order.line_items.new
   end
 
   def show

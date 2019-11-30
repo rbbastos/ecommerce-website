@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :initialize_session
-
   def index
     @orders = Order.order(:name)
   end
@@ -43,10 +41,5 @@ class OrdersController < ApplicationController
       gstTimeOfPurchase: @cust.province.gstTax
     )
     order
-  end
-
-  def initialize_session
-    c = Customer.order('random()').first
-    session[:cust_id] ||= c.id
   end
 end

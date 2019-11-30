@@ -3,6 +3,7 @@
 class LineItemsController < ApplicationController
   # before_action :initialize_session
   after_action :update_session, only: [:create]
+  before_action :initialize_session
 
   def index
     @line_items = LineItem.order(:name)
@@ -108,5 +109,10 @@ class LineItemsController < ApplicationController
 
   def update_session
     session[:order_id] = @order.id
+  end
+
+  def initialize_session
+    c = Customer.order('random()').first
+    session[:cust_id] ||= c.id
   end
 end

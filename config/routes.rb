@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # get 'categories/index'
   resources :categories, only: %i[index show]
+
   resources :deals, only: :show
   # get 'deals/show'
 

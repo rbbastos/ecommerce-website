@@ -10,6 +10,7 @@ class Order < ApplicationRecord
   # validates :pstTimeOfPurchase, :gstTimeOfPurchase, numericality: { only_decimal: true }
 
   before_save :set_subtotal
+  # before_save :set_total_price
 
   def subtotal
     line_items.collect { |line_item| line_item.valid? ? (line_item.unit_price.to_f * line_item.quantity.to_i) : 0 }.sum
@@ -20,4 +21,8 @@ class Order < ApplicationRecord
   def set_subtotal
     self[:subtotal] = subtotal
   end
+
+  # def set_total_price
+  #   self[:total_price] = (gstTimeOfPurchase * set_subtotal) + (pstTimeOfPurchase * set_subtotal) + set_subtotal
+  # end
 end
