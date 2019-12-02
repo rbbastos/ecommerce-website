@@ -45,7 +45,7 @@
             <td>Order Total:</td>
             <td><%=number_to_currency(@order.gstTimeOfPurchase/100 * @order.subtotal + @order.pstTimeOfPurchase/100 * @order.subtotal + @order.subtotal, unit: 'CDN$ ') %></td>
           </tr>
-          <tr><td><%= link_to  "Place your order", order_final_path, class: 'btn btn-warning' %></td></tr>
+          <tr><td><%= link_to  "Place your order", order_final_path, class: 'btn btn-warning' %> <%= button_to "buy now!", order_final_path, method: :post, params: { id: @order.id }, remote: true %></td></tr>
         </tbody>
       </table>
 

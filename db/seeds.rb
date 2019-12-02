@@ -14,13 +14,43 @@ require 'json'
 LineItem.destroy_all
 Product.destroy_all
 # DO NOT DESTROY Category.destroy_all # if destroy, fix python script
+# Deal.destroy_all
 Payment.destroy_all
 Order.destroy_all
 Customer.destroy_all
 # DO NOT DESTROY Province.destroy_all # if destroy, populate again manually
+# Province.destroy_all
 AdminUser.destroy_all
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+['New', 'Recently Added', 'On Sale'].each do |deal|
+  Deal.find_or_create_by(name: deal)
+end
+
+['All', 'Video Games & Movies', 'Smart Home & Car Electronics', 'Computers & Tablets', 'Musical Instruments', 'TV & Home Theatre'].each do |cat|
+  Category.find_or_create_by(name: cat)
+end
+
+provinces = {
+  Ontario: { gstTax: 0, pstTax: 13 },
+  Quebec: { gstTax: 9.975, pstTax: 5 },
+  'British Columbia': { gstTax: 7, pstTax: 5 },
+  Alberta: { gstTax: 0, pstTax: 5 },
+  Manitoba: { gstTax: 7, pstTax: 5 },
+  Saskatchewan: { gstTax: 6, pstTax: 5 },
+  'Nova Scotia': { gstTax: 0, pstTax: 0 },
+  'New Brunswick': { gstTax: 0, pstTax: 0 },
+  'Newfoundland and Labrador': { gstTax: 0, pstTax: 15 },
+  'Prince Edward Island': { gstTax: 0, pstTax: 15 },
+  'Northwest Territories': { gstTax: 5, pstTax: 0 },
+  Nunavut: { gstTax: 5, pstTax: 0 },
+  Yukon: { gstTax: 5, pstTax: 0 }
+}
+
+provinces.each do |k, v|
+  Province.find_or_create_by(name: k, gstTax: v[:gstTax], pstTax: v[:pstTax])
+end
 
 product = Product.new
 customer = Customer.new
@@ -41,7 +71,7 @@ json.each do |name|
                             category_id: name.values[3].to_i,
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
-                            deal_id: rand(1..3).to_i)
+                            deal_id: rand(34..36).to_i)
   downloaded_image = open(name.values[2])
   product.image.attach(io: downloaded_image,
                        filename: name.values[2].split('/').last)
@@ -58,7 +88,7 @@ rand(50..100).times do
                              country: 'Canada',
                              postalCode: Faker::Address.postcode,
                              phone: Faker::PhoneNumber.phone_number,
-                             province_id: rand(1..13).to_i)
+                             province_id: rand(144..156).to_i)
   rand(0..3).times do
     order = Order.create(pstTimeOfPurchase: customer.province.gstTax,
                          gstTimeOfPurchase: customer.province.pstTax,

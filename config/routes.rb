@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # If you want to route /admin/articles to ArticlesController (without the Admin:: module prefix), you could use:
+  # scope '/admin' do
+  # resources :articles, :comments
+  # end
+  # adds /checkout/something pointing to the same action
+  scope '/checkout' do # They will all start with /checkout. There is no model.
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+  end
+
   resources :pages
 
   get '/static/:permalink', to: 'pages#permalink', as: 'permalink'
