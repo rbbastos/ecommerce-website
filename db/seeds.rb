@@ -24,6 +24,10 @@ AdminUser.destroy_all
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
+product = Product.new
+customer = Customer.new
+order = Order.new
+
 ['New', 'Recently Added', 'On Sale'].each do |deal|
   Deal.find_or_create_by(name: deal)
 end
@@ -52,14 +56,12 @@ provinces.each do |k, v|
   Province.find_or_create_by(name: k, gstTax: v[:gstTax], pstTax: v[:pstTax])
 end
 
-product = Product.new
-customer = Customer.new
-order = Order.new
 # lineItems = LineItem.new
 json = ActiveSupport::JSON.decode(File.read('db/bestbuy4.json'))
 # puts json
 
 json.each do |name|
+  deal = Deal.order('random()').first
   # puts name.values[1][1..-1].to_f
   # product = Product.create!(name: name.values[0],
   #                           category_id: name.values[3].to_i,
@@ -71,7 +73,7 @@ json.each do |name|
                             category_id: name.values[3].to_i,
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
-                            deal_id: rand(34..36).to_i)
+                            deal_id: deal.to_i)
   downloaded_image = open(name.values[2])
   product.image.attach(io: downloaded_image,
                        filename: name.values[2].split('/').last)
@@ -81,6 +83,7 @@ end
 
 Faker::Config.locale = 'en-CA'
 rand(50..100).times do
+  province = Province.order('random()').first
   customer = Customer.create(firstName: Faker::Name.first_name,
                              lastName: Faker::Name.last_name,
                              streetAddress: Faker::Address.street_address,
@@ -88,7 +91,7 @@ rand(50..100).times do
                              country: 'Canada',
                              postalCode: Faker::Address.postcode,
                              phone: Faker::PhoneNumber.phone_number,
-                             province_id: rand(144..156).to_i)
+                             province_id: province.to_i)
   rand(0..3).times do
     order = Order.create(pstTimeOfPurchase: customer.province.gstTax,
                          gstTimeOfPurchase: customer.province.pstTax,
