@@ -56,21 +56,15 @@ provinces.each do |k, v|
   Province.find_or_create_by(name: k, gstTax: v[:gstTax], pstTax: v[:pstTax])
 end
 
-# lineItems = LineItem.new
+lineItems = LineItem.new
 json = ActiveSupport::JSON.decode(File.read('db/bestbuy4.json'))
 # puts json
 
 json.each do |name|
   deal = Deal.order('random()').first
-  # puts name.values[1][1..-1].to_f
-  # product = Product.create!(name: name.values[0],
-  #                           category_id: name.values[3].to_i,
-  #                           manufacturer: name.values[0].split(' ').first,
-  #                           sellPrice: name.values[1][1..-1].to_d,
-  #                           image: name.values[2],
-  #                           deal_id: rand(1..3).to_i)
+  category = Category.order('random()').first
   product = Product.create!(name: name.values[0],
-                            category_id: name.values[3].to_i,
+                            category_id: category.id.to_i,
                             manufacturer: name.values[0].split(' ').first,
                             sellPrice: name.values[1][1..-1].to_d,
                             deal_id: deal.id.to_i)
@@ -78,8 +72,26 @@ json.each do |name|
   product.image.attach(io: downloaded_image,
                        filename: name.values[2].split('/').last)
 
+  # product = Product.create!(name: name.values[0],
+  #                           category_id: name.values[3].to_i,
+  #                           manufacturer: name.values[0].split(' ').first,
+  #                           sellPrice: name.values[1][1..-1].to_d,
+  #                           deal_id: deal.id.to_i)
+  # downloaded_image = open(name.values[2])
+  # product.image.attach(io: downloaded_image,
+  #                      filename: name.values[2].split('/').last)
+
   # p.images.attach(io: downloaded_image, filename: filename_to_use_locally)
 end
+# rand(50..100).times do
+#   category = Category.order('random()').first
+#   deal = Deal.order('random()').first
+#   product = Product.create!(name: Faker::Commerce.product_name,
+#                             category_id: category.id.to_i,
+#                             manufacturer: Faker::Company.name,
+#                             sellPrice: rand(1..1000).to_d,
+#                             deal_id: deal.id.to_i)
+# end
 
 Faker::Config.locale = 'en-CA'
 rand(50..100).times do
